@@ -20,12 +20,15 @@ $secondary-color: #484848;
         display: flex;
         justify-content: flex-start;
         align-items: center;
+        img{
+            margin-left: 16px;
+            width: 2.5rem;
+        }
         &-title{
             color: $primary-color;
             font-weight: bold;
             font-size: 2rem;
             padding: 12px;
-            margin-left: 16px;
             box-sizing: border-box;
             letter-spacing: 2px;
         }
