@@ -1,14 +1,21 @@
 import React, { useEffect, useState, useRef } from "react";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
+import { useNavigate } from "react-router-dom";
+import Loader from "../../components/Loader/Loader";
 import { searchRecipe, commonRecipeApi } from "../../api/recipeApi";
 import "./RecipeResults.scss";
 
 function RecipeResults() {
   const [isLoading, setIsLoading] = useState(true);
+  const [showLoadMore, setShowLoadMore] = useState(false);
   const recipeDataRef = useRef({});
   const paginationUrlRef = useRef({});
   const pathName = window.location.pathname;
-  const searchName = pathName.substring(pathName.lastIndexOf("/"));
+  const navigate = useNavigate();
+  const searchName = pathName
+    .substring(pathName.lastIndexOf("/"))
+    .split("/")
+    .join("");
 
   useEffect(() => {
     if (isLoading) {
@@ -27,33 +34,52 @@ function RecipeResults() {
     console.log(recipeDataRef);
   }, []);
 
-  const handlePaginationBtnClick = (type) => {
-    let pageUri;
-    if (type === "prev") {
-      pageUri = paginationUrlRef.current.prev;
-    } else {
-      pageUri = paginationUrlRef.current.next;
+  useEffect(() => {
+    let timeoutId;
+    if (showLoadMore) {
+      timeoutId = setTimeout(() => {
+        let nextSetUri = recipeDataRef.current._links.next;
+        commonRecipeApi(nextSetUri.href).then((res) => {
+          let currentRecipeList = [
+            ...recipeDataRef.current.hits,
+            ...res.data.hits,
+          ];
+          res.data.hits = currentRecipeList;
+          recipeDataRef.current = res.data;
+          setShowLoadMore(false);
+        });
+      }, 2000);
     }
-    recipeDataRef.current = {};
-    setIsLoading(true);
-    commonRecipeApi(pageUri.href).then((res) => {
-      recipeDataRef.current = res.data;
-      let nextPageUri = recipeDataRef.current._links.next;
-      let prev = paginationUrlRef.current.next;
-      if (nextPageUri) {
-        paginationUrlRef.current.prev =
-          recipeDataRef.current.from > 20 ? prev : null;
-        paginationUrlRef.current.next = nextPageUri;
-      }
-      setIsLoading(false);
-    });
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [showLoadMore]);
+
+  const trackScrolling = (e) => {
+    let resultContainer =
+      e.currentTarget || document.getElementById("recipeResultContainer");
+    let scrollDiff = Math.floor(
+      resultContainer.scrollHeight - resultContainer.scrollTop
+    );
+    let nextSetUri = recipeDataRef.current._links.next;
+    if (scrollDiff === Math.floor(resultContainer.clientHeight) && nextSetUri) {
+      setShowLoadMore(true);
+    }
   };
 
   const renderRecipes = () => {
     let recipeArr = recipeDataRef.current.hits;
     if (recipeArr.length === 0) {
-      // show empty state
-      return;
+      return (
+        <div
+          onClick={() => {
+            navigate("/");
+          }}
+          className="reciperesult__empty"
+        >
+          Search other recipes
+        </div>
+      );
     } else {
       return recipeArr.map((item, index) => (
         <div key={`epicureRecipe-${index}`}>
@@ -68,36 +94,28 @@ function RecipeResults() {
     }
   };
   return (
-    <div className="reciperesult__container">
+    <div
+      onScroll={trackScrolling}
+      id="recipeResultContainer"
+      className="reciperesult__container"
+    >
       {isLoading ? (
-        <div>Loading.....</div>
+        <div className="reciperesult__loading">
+          <Loader text={"Cooking..."} type={"primary"} />
+        </div>
       ) : (
         <>
           <div className="reciperesult__heading">
             <span className="reciperesult__title">Recipe Results</span>
             <span className="reciperesult__count">
-              {recipeDataRef.current.count} recipes found
+              {recipeDataRef.current.count} recipes found for "{searchName}"
             </span>
           </div>
           <div className="reciperesult__cards">{renderRecipes()}</div>
-          {paginationUrlRef.current.prev && (
-            <div
-              onClick={() => {
-                handlePaginationBtnClick("prev");
-              }}
-              className="reciperesult__next"
-            >
-              prev
-            </div>
-          )}
-          {paginationUrlRef.current.next && (
-            <div
-              onClick={() => {
-                handlePaginationBtnClick("next");
-              }}
-              className="reciperesult__next"
-            >
-              next
+          {showLoadMore && (
+            <div className="reciperesult__loadmore">
+              {" "}
+              <Loader />{" "}
             </div>
           )}
         </>

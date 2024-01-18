@@ -1,11 +1,57 @@
-.recipecard__{
-    &container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        // width: 8rem;
-        // height: 3rem;
+.recipecard__ {
+  &container {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 300px;
+    height: 250px;
+    border-radius: 8px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    transition: transform 0.5s;
+    &:hover {
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+        rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+      transform: scale(90%);
     }
+  }
+  &img {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    img {
+      height: 100%;
+      width: 100%;
+      border-radius: 8px;
+    }
+  }
+  &detail {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    font-size: 1.5rem;
+    border-radius: 8px;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.25) 59%,
+      rgba(0, 0, 0, 0.75) 100%
+    );
+    span {
+      margin-bottom: 1rem;
+      color: #fff;
+      font-weight: 500;
+      text-align: center;
+    }
+  }
+  &fav {
+    position: absolute;
+    top: 0;
+    right: 2rem;
+  }
 }
