@@ -9,10 +9,10 @@ function RecipeCard({ imgSrc, name, uri, calories }) {
     const navigate = useNavigate();
     const handleRecipeSelect = (uri) => {
         dispatch(updateSelectedUri(uri));
-        navigate('/recipe/view')
+        navigate(`/recipe/view`)
     }
   return (
-    <div onClick={() => {handleRecipeSelect(uri)}} className="recipecard__container">
+    <div onClick={() => {handleRecipeSelect(uri)}} data-recipe-uri={uri} className="recipecard__container">
       <div className="recipecard__img">
         <img src={imgSrc} alt="" srcSet="" />
       </div>

@@ -1,0 +1,103 @@
+$primary-color: #b93010;
+$secondary-color: #484848;
+.recipeview__ {
+  &container {
+    height: calc(100vh - 10%);
+    width: 90%;
+    margin-top: 1.5rem;
+  }
+  &back {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  &content {
+    display: flex;
+    margin-top: 1rem;
+    gap: 2rem;
+  }
+  &img {
+    width: 40%;
+    background-repeat: no-repeat;
+    height: 300px;
+    background-size: cover;
+    border-radius: 8px;
+    box-shadow: 0 0 40px #cbcbcb;
+  }
+  &detail {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    &-name {
+      font-size: 2.5rem;
+      font-weight: 600;
+      width: 100%;
+      white-space: initial;
+      word-wrap: break-word;
+      margin-bottom: 2rem;
+    }
+    &-secondaryinfo {
+      font-size: 1.5rem;
+      font-weight: 300;
+      margin: 0.5rem 0;
+      span {
+        text-transform: capitalize;
+      }
+    }
+  }
+  &incredients {
+    margin-top: 2rem;
+    width: 40%;
+    background: #eaeded;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+    ul {
+      font-size: 1.2rem;
+      font-weight: 400;
+      line-height: 2;
+    }
+  }
+  &subtitle {
+    font-size: 1.7rem;
+    font-weight: 500;
+  }
+  &preparation {
+    display: flex;
+    width: 50%;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 2rem;
+  }
+  &instruction {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 50%;
+    img {
+      width: 250px;
+    }
+    a {
+      font-size: 1.5rem;
+      text-decoration: none;
+      background: $primary-color;
+      color: #fff;
+      padding: 1rem 1.5rem;
+      border-radius: 36px;
+      box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+      :active {
+        color: #fff;
+      }
+    }
+  }
+}

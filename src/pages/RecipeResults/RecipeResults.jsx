@@ -57,12 +57,12 @@ function RecipeResults() {
     } else {
       return recipeArr.map((item, index) => (
         <div key={`epicureRecipe-${index}`}>
-        <RecipeCard
-          imgSrc={item.recipe.image}
-          calories={item.recipe.calories}
-          name={item.recipe.label}
-          uri={item.recipe.uri}
-        />
+          <RecipeCard
+            imgSrc={item.recipe.image}
+            calories={item.recipe.calories}
+            name={item.recipe.label}
+            uri={item._links.self.href}
+          />
         </div>
       ));
     }
