@@ -4,7 +4,7 @@ let baseURL = "https://api.edamam.com/api/recipes/v2";
 let apiKey = process.env.REACT_APP_EDAMAM_API_KEY;
 let appId = process.env.REACT_APP_EDAMAM_APP_ID;
 
-export const searchRecipe = async (searchString) => {
+export const searchRecipe = (searchString) => {
   let params = {
     app_id: appId,
     app_key: apiKey,
@@ -16,6 +16,21 @@ export const searchRecipe = async (searchString) => {
     url: `${baseURL}`,
     params: params,
   };
-  let result = await axios(configData);
-  console.log(result, "resultttt");
+  let result = axios(configData);
+  return result;
 };
+
+export const commonRecipeApi = (url) => {
+    // let params = {
+    //     app_id: appId,
+    //     app_key: apiKey,
+    //     type: "public",
+    //   };
+    let configData = {
+        method: "get",
+        url: url,
+        // params: params,
+      };
+      let result = axios(configData);
+      return result;
+}

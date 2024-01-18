@@ -1,6 +1,7 @@
 
 $primary-color: #B93010;
 $secondary-color: #484848;
+$error-color: #ff3333;
 
 
 .landingpage__{
@@ -88,6 +89,12 @@ $secondary-color: #484848;
             font-weight: 100;
             font-size: 1.2rem;
             color: $secondary-color;
+        }
+        &-err{
+            color: $error-color;
+            width: 100%;
+            padding: 0 !important;    
+            font-weight: 500;    
         }
     }
 
