@@ -31,7 +31,6 @@ function RecipeResults() {
         setIsLoading(false);
       });
     }
-    console.log(recipeDataRef);
   }, []);
 
   useEffect(() => {

@@ -1,17 +1,21 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { commonRecipeApi } from "../../api/recipeApi";
+import { getLocalStorageValue, setLocalStorageValue } from '../../helper/localStorage';
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import CookingIllustration from "../../assets/img/cooking-illustraion-2.png";
 import "./RecipieView.scss";
 import Loader from "../../components/Loader/Loader";
 
 function RecipeView() {
   const [isLoading, setIsLoading] = useState(true);
+  const [isFav, setIsFav] = useState(false)
   const navigate = useNavigate();
   const selcetedRecipeRef = useRef();
   const selectedRecipeUri = useSelector((state) => state.selectedRecipeUri);
+  let favorites = getLocalStorageValue('epicureFav') || []
 
   useEffect(() => {
     if (!selectedRecipeUri) {
@@ -20,6 +24,11 @@ function RecipeView() {
     }
     commonRecipeApi(selectedRecipeUri).then((res) => {
       selcetedRecipeRef.current = res.data;
+      let recipeUri = res.data.recipe.uri;
+      let isInFav = favorites.filter((item) => recipeUri===item.recipe.uri)
+      if(isInFav.length > 0) {
+        setIsFav(true);
+      }
       setIsLoading(false);
     });
   }, [selectedRecipeUri]);
@@ -46,6 +55,17 @@ function RecipeView() {
   const handleBackBtnClick = () => {
     navigate(-1);
   };
+
+  const handleFavoriteClick = () => {
+    let recipeUri = selcetedRecipeRef.current.recipe.uri;
+    if(isFav) {
+        favorites = favorites.filter((item) => recipeUri!==item.recipe.uri);
+    } else {
+        favorites.push(selcetedRecipeRef.current);
+    }
+    setLocalStorageValue('epicureFav', favorites);
+    setIsFav((prev) => !prev)
+  }
 
   return (
     <div className="recipeview__container">
@@ -86,6 +106,10 @@ function RecipeView() {
               </div>
               <div className="recipeview__detail-secondaryinfo">
                 Source: <span>{selcetedRecipeRef.current.recipe.source}</span>
+              </div>
+              <div onClick={handleFavoriteClick} className="recipeview__addfav">
+                <span>Add to favorite</span>
+                <FavoriteOutlinedIcon style={{color: isFav ?"#f87c7c" : "#f8f8f8"}}/>
               </div>
             </div>
           </div>

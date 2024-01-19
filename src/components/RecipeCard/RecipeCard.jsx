@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { updateSelectedUri } from "../../reducers/epicureReducers";
@@ -29,4 +29,4 @@ function RecipeCard({ imgSrc, name, uri }) {
   );
 }
 
-export default RecipeCard;
+export default memo(RecipeCard);

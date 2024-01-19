@@ -1,0 +1,21 @@
+.favorites__{
+    &container{
+        width: 90%;
+    }
+    &title{
+        font-size: 2.3rem;
+        font-weight: 600;
+    }
+    &heading{
+        margin-top: 4rem;
+    }
+    &cards {
+        grid-row-gap: 1rem;
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    justify-content: left;
+    margin: 2rem 0;
+    row-gap: 1rem;
+    }
+}

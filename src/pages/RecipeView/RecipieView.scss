@@ -38,7 +38,6 @@ $secondary-color: #484848;
       width: 100%;
       white-space: initial;
       word-wrap: break-word;
-      margin-bottom: 2rem;
     }
     &-secondaryinfo {
       font-size: 1.5rem;
@@ -105,5 +104,21 @@ $secondary-color: #484848;
         color: #fff;
       }
     }
+  }
+  &addfav{
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    background: #464646;
+    color: white;
+    padding: 1rem 2.5rem;
+    border-radius: 32px;
+    font-weight: 500;
+    margin-top: 4px;
+    cursor: pointer;
+    margin-top: 4px;
   }
 }

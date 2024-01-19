@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom'
 import "./LandingPage.scss";
 import SearchIcon from '@mui/icons-material/Search';
@@ -21,6 +21,13 @@ function LandingPage() {
       }, 2000)
     }
   }
+
+  const handleOnKeyUp = (e) => {
+    if (e.key === 'Enter' || e.keyCode === 13) {
+      handleBtnOnClick()  
+    }
+  }
+  
   return (
     <div className="landingpage__layout">
       <div className="landingpage__header">
@@ -36,7 +43,7 @@ function LandingPage() {
           go.
         </div>
         <div className="landingpage__content-search">
-          <input id="recipeSearch" placeholder="Search recipe" value={searchQuery} onChange={(e) => setSearchQuery(e.currentTarget.value)} type="text" />
+          <input onKeyUp={handleOnKeyUp} id="recipeSearch" placeholder="Search recipe" value={searchQuery} onChange={(e) => setSearchQuery(e.currentTarget.value)} type="text" />
           <button onClick={handleBtnOnClick} className="landingpage__content-search-btn"><SearchIcon style={{color:"#fff", fontSize: "1.5rem"}} /></button>
         </div>
         {showErrMsg && <div className="landingpage__content-err">*Enter a valid recipe name</div>}
