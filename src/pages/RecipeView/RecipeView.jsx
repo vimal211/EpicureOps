@@ -17,7 +17,9 @@ function RecipeView() {
   const [isFav, setIsFav] = useState(false);
   const navigate = useNavigate();
   const selcetedRecipeRef = useRef();
-  const selectedRecipeUri = useSelector((state) => state.selectedRecipeUri);
+  const selectedRecipeUri = useSelector(
+    (state) => state.selectedRecipeReducer.selectedRecipeUri,
+  );
   let favorites = getLocalStorageValue("epicureFav") || [];
 
   useEffect(() => {

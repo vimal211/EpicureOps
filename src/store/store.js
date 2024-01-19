@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import selectedRecipeReducer from "../reducers/epicureReducers";
+import allReducers from "../reducers/epicureReducers";
 
-const store = configureStore({ reducer: selectedRecipeReducer });
+const store = configureStore({ reducer: allReducers });
 
 export default store;

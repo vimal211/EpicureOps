@@ -1,7 +1,12 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
+import { combineReducers } from "@reduxjs/toolkit";
 
 const initalSelectedRecipe = {
   selectedRecipeUri: "",
+};
+
+const initalHistory = {
+  searchHistory: [],
 };
 
 const selectedRecipeSlice = createSlice({
@@ -14,5 +19,27 @@ const selectedRecipeSlice = createSlice({
   },
 });
 
+const searchHistorySlice = createSlice({
+  name: "search history",
+  initialState: initalHistory,
+  reducers: {
+    addHistory: (state, action) => {
+      const history = {
+        id: nanoid(),
+        text: action.payload,
+      };
+      let newState = state.searchHistory.filter(
+        (item) => item.text !== history.text,
+      );
+      newState.unshift(history);
+      state.searchHistory = newState;
+    },
+  },
+});
+
 export const { updateSelectedUri } = selectedRecipeSlice.actions;
-export default selectedRecipeSlice.reducer;
+export const { addHistory } = searchHistorySlice.actions;
+export default combineReducers({
+  selectedRecipeReducer: selectedRecipeSlice.reducer,
+  searchHistoryReducer: searchHistorySlice.reducer,
+});
