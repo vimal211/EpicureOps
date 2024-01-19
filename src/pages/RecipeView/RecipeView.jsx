@@ -2,7 +2,10 @@ import React, { useEffect, useRef, useState, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { commonRecipeApi } from "../../api/recipeApi";
-import { getLocalStorageValue, setLocalStorageValue } from '../../helper/localStorage';
+import {
+  getLocalStorageValue,
+  setLocalStorageValue,
+} from "../../helper/localStorage";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import CookingIllustration from "../../assets/img/cooking-illustraion-2.png";
@@ -11,11 +14,11 @@ import Loader from "../../components/Loader/Loader";
 
 function RecipeView() {
   const [isLoading, setIsLoading] = useState(true);
-  const [isFav, setIsFav] = useState(false)
+  const [isFav, setIsFav] = useState(false);
   const navigate = useNavigate();
   const selcetedRecipeRef = useRef();
   const selectedRecipeUri = useSelector((state) => state.selectedRecipeUri);
-  let favorites = getLocalStorageValue('epicureFav') || []
+  let favorites = getLocalStorageValue("epicureFav") || [];
 
   useEffect(() => {
     if (!selectedRecipeUri) {
@@ -25,8 +28,8 @@ function RecipeView() {
     commonRecipeApi(selectedRecipeUri).then((res) => {
       selcetedRecipeRef.current = res.data;
       let recipeUri = res.data.recipe.uri;
-      let isInFav = favorites.filter((item) => recipeUri===item.recipe.uri)
-      if(isInFav.length > 0) {
+      let isInFav = favorites.filter((item) => recipeUri === item.recipe.uri);
+      if (isInFav.length > 0) {
         setIsFav(true);
       }
       setIsLoading(false);
@@ -58,14 +61,14 @@ function RecipeView() {
 
   const handleFavoriteClick = () => {
     let recipeUri = selcetedRecipeRef.current.recipe.uri;
-    if(isFav) {
-        favorites = favorites.filter((item) => recipeUri!==item.recipe.uri);
+    if (isFav) {
+      favorites = favorites.filter((item) => recipeUri !== item.recipe.uri);
     } else {
-        favorites.push(selcetedRecipeRef.current);
+      favorites.push(selcetedRecipeRef.current);
     }
-    setLocalStorageValue('epicureFav', favorites);
-    setIsFav((prev) => !prev)
-  }
+    setLocalStorageValue("epicureFav", favorites);
+    setIsFav((prev) => !prev);
+  };
 
   return (
     <div className="recipeview__container">
@@ -109,7 +112,9 @@ function RecipeView() {
               </div>
               <div onClick={handleFavoriteClick} className="recipeview__addfav">
                 <span>Add to favorite</span>
-                <FavoriteOutlinedIcon style={{color: isFav ?"#f87c7c" : "#f8f8f8"}}/>
+                <FavoriteOutlinedIcon
+                  style={{ color: isFav ? "#f87c7c" : "#f8f8f8" }}
+                />
               </div>
             </div>
           </div>

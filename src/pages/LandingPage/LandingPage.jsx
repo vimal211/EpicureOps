@@ -1,33 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import "./LandingPage.scss";
-import SearchIcon from '@mui/icons-material/Search';
-import EpicureopsLogo from '../../assets/img/logo.png'
+import SearchIcon from "@mui/icons-material/Search";
+import EpicureopsLogo from "../../assets/img/logo.png";
 
 function LandingPage() {
-  const [searchQuery, setSearchQuery] = useState('')
+  const [searchQuery, setSearchQuery] = useState("");
   const [showErrMsg, setShowErrMsg] = useState(false);
   const navigate = useNavigate();
 
   const handleBtnOnClick = () => {
-    if(searchQuery.length !== 0) {
+    if (searchQuery.length !== 0) {
       navigate(`/search/${searchQuery}`);
-      setSearchQuery('')
+      setSearchQuery("");
     } else {
       setShowErrMsg(true);
       let timeoutId = setTimeout(() => {
         clearTimeout(timeoutId);
         setShowErrMsg(false);
-      }, 2000)
+      }, 2000);
     }
-  }
+  };
 
   const handleOnKeyUp = (e) => {
-    if (e.key === 'Enter' || e.keyCode === 13) {
-      handleBtnOnClick()  
+    if (e.key === "Enter" || e.keyCode === 13) {
+      handleBtnOnClick();
     }
-  }
-  
+  };
+
   return (
     <div className="landingpage__layout">
       <div className="landingpage__header">
@@ -43,10 +43,26 @@ function LandingPage() {
           go.
         </div>
         <div className="landingpage__content-search">
-          <input onKeyUp={handleOnKeyUp} id="recipeSearch" placeholder="Search recipe" value={searchQuery} onChange={(e) => setSearchQuery(e.currentTarget.value)} type="text" />
-          <button onClick={handleBtnOnClick} className="landingpage__content-search-btn"><SearchIcon style={{color:"#fff", fontSize: "1.5rem"}} /></button>
+          <input
+            onKeyUp={handleOnKeyUp}
+            id="recipeSearch"
+            placeholder="Search recipe"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.currentTarget.value)}
+            type="text"
+          />
+          <button
+            onClick={handleBtnOnClick}
+            className="landingpage__content-search-btn"
+          >
+            <SearchIcon style={{ color: "#fff", fontSize: "1.5rem" }} />
+          </button>
         </div>
-        {showErrMsg && <div className="landingpage__content-err">*Enter a valid recipe name</div>}
+        {showErrMsg && (
+          <div className="landingpage__content-err">
+            *Enter a valid recipe name
+          </div>
+        )}
       </div>
     </div>
   );

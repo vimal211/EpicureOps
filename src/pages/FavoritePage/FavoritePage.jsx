@@ -1,11 +1,10 @@
 import React, { useMemo } from "react";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import { getLocalStorageValue } from "../../helper/localStorage";
 import "./FavoritePage.scss";
 
 function FavoritePage() {
-
   const favorites = useMemo(() => {
     let data = getLocalStorageValue("epicureFav") || [];
     return data;
@@ -38,16 +37,16 @@ function FavoritePage() {
         </div>
       ));
     }
-  }
+  };
 
   return (
     <div className="favorites__container">
       <div className="favorites__heading">
-        <div className="favorites__title">Favorite Recipes ({favorites.length})</div>
+        <div className="favorites__title">
+          Favorite Recipes ({favorites.length})
+        </div>
       </div>
-      <div className="favorites__cards">
-        {renderFavoritesCards()}
-      </div>
+      <div className="favorites__cards">{renderFavoritesCards()}</div>
     </div>
   );
 }

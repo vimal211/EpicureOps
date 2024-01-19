@@ -13,7 +13,7 @@ function RecipeResults() {
   const pathName = window.location.pathname;
   const navigate = useNavigate();
   const searchName = decodeURI(
-    pathName.substring(pathName.lastIndexOf("/")).split("/").join("")
+    pathName.substring(pathName.lastIndexOf("/")).split("/").join(""),
   );
 
   useEffect(() => {
@@ -57,7 +57,7 @@ function RecipeResults() {
     let resultContainer =
       e.currentTarget || document.getElementById("recipeResultContainer");
     let scrollDiff = Math.floor(
-      resultContainer.scrollHeight - resultContainer.scrollTop
+      resultContainer.scrollHeight - resultContainer.scrollTop,
     );
     let nextSetUri = recipeDataRef.current._links.next;
     if (scrollDiff === Math.floor(resultContainer.clientHeight) && nextSetUri) {

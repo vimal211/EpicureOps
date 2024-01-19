@@ -21,7 +21,6 @@ export const searchRecipe = (searchString) => {
 };
 
 export const commonRecipeApi = (url) => {
-
   let configData = {
     method: "get",
     url: url,
