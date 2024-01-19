@@ -12,10 +12,9 @@ function RecipeResults() {
   const paginationUrlRef = useRef({});
   const pathName = window.location.pathname;
   const navigate = useNavigate();
-  const searchName = pathName
-    .substring(pathName.lastIndexOf("/"))
-    .split("/")
-    .join("");
+  const searchName = decodeURI(
+    pathName.substring(pathName.lastIndexOf("/")).split("/").join("")
+  );
 
   useEffect(() => {
     if (isLoading) {

@@ -46,3 +46,44 @@ $secondary-color: #484848;
         }
     }
 }
+
+@media only screen and (max-width: 700px) {
+    .header__{
+        &container{
+            img{
+                width: 2rem;
+            }
+        }
+        &title{
+            font-size: 1.5rem;
+        }
+        &nav{
+            gap: .5rem;
+        }
+        &navlink{
+            font-size: .7rem;
+            svg{
+                display: none;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .header__{
+        &container{
+            img{
+                width: 1.5rem;
+            }
+        }
+        &title{
+            font-size: .8rem;
+        }
+        &nav{
+            gap: .2rem;
+        }
+        &navlink{
+            padding: 4px;
+        }
+    }
+}

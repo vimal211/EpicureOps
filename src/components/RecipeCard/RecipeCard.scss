@@ -50,3 +50,29 @@
     }
   }
 }
+
+@media only screen and (max-width: 1300px) {
+  .recipecard__ {
+      &container {
+        width: 250px;
+        height: 200px;     
+     }
+  }  
+}
+
+@media only screen and (max-width: 559px) {
+  .recipecard__ {
+    &container {
+      width: 200px;
+      height: 150px;     
+   }
+}  
+}
+@media only screen and (max-width: 464px) {
+  .recipecard__ {
+    &container {
+      width: 300px;
+      height: 250px;     
+   }
+}  
+}

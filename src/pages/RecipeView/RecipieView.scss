@@ -4,7 +4,7 @@ $secondary-color: #484848;
   &container {
     height: calc(100vh - 10%);
     width: 90%;
-    margin-top: 1.5rem;
+    margin: 1.5rem 0;
   }
   &back {
     display: flex;
@@ -89,6 +89,7 @@ $secondary-color: #484848;
     flex-direction: column;
     gap: 1.5rem;
     width: 50%;
+    margin-bottom: 1.5rem;
     img {
       width: 250px;
     }
@@ -121,4 +122,21 @@ $secondary-color: #484848;
     cursor: pointer;
     margin-top: 4px;
   }
+}
+
+@media only screen and (max-width: 760px) {
+    .recipeview__ {
+        &content{
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        &img, &incredients, &detail, &instruction{
+            width: 90%;
+        }
+        &preparation{
+            flex-direction: column;
+        }
+        
+    }
 }

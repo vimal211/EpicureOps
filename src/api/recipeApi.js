@@ -20,26 +20,11 @@ export const searchRecipe = (searchString) => {
   return result;
 };
 
-export const getRecipeDetails = (recipeHash) => {
-  let configData = {
-    method: "get",
-    url: `${baseURL}/${recipeHash}`,
-    params: params,
-  };
-  let result = axios(configData);
-  return result;
-};
-
 export const commonRecipeApi = (url) => {
-  // let params = {
-  //     app_id: appId,
-  //     app_key: apiKey,
-  //     type: "public",
-  //   };
+
   let configData = {
     method: "get",
     url: url,
-    // params: params,
   };
   let result = axios(configData);
   return result;
