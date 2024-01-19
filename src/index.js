@@ -8,8 +8,10 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <Router> // wrapped the app with Router to use router functionalites across app
-    <Provider store={store}> // wrapped the app with Provider with store as prop to access store across app
+  <Router>
+    {/* wrapped the app with Router to use router functionalites across app */}
+    <Provider store={store}>
+      {/* wrapped the app with Provider with store as prop to access store across app */}
       <App />
     </Provider>
   </Router>,

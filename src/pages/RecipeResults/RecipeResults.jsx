@@ -36,7 +36,7 @@ function RecipeResults() {
     // this useEffect is used to load more data when showLoadMore is set to true
     let timeoutId;
     if (showLoadMore) {
-    // debounce is used to avoid making many api calls
+      // debounce is used to avoid making many api calls
       timeoutId = setTimeout(() => {
         let nextSetUri = recipeDataRef.current._links.next;
         commonRecipeApi(nextSetUri.href).then((res) => {
@@ -55,7 +55,8 @@ function RecipeResults() {
     };
   }, [showLoadMore]);
 
-  const trackScrolling = (e) => { // function used to track page scrolling
+  const trackScrolling = (e) => {
+    // function used to track page scrolling
     let resultContainer =
       e.currentTarget || document.getElementById("recipeResultContainer");
     let scrollDiff = Math.floor(

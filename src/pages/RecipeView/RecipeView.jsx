@@ -61,7 +61,8 @@ function RecipeView() {
     navigate(-1);
   };
 
-  const handleFavoriteClick = () => {// this function is to handle add/remove item to/from favorite
+  const handleFavoriteClick = () => {
+    // this function is to handle add/remove item to/from favorite
     let recipeUri = selcetedRecipeRef.current.recipe.uri;
     if (isFav) {
       favorites = favorites.filter((item) => recipeUri !== item.recipe.uri);
