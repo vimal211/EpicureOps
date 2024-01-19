@@ -18,9 +18,9 @@ function RecipeView() {
   const navigate = useNavigate();
   const selcetedRecipeRef = useRef();
   const selectedRecipeUri = useSelector(
-    (state) => state.selectedRecipeReducer.selectedRecipeUri,
+    (state) => state.selectedRecipeReducer.selectedRecipeUri, // get selected recipe url from redux store
   );
-  let favorites = getLocalStorageValue("epicureFav") || [];
+  let favorites = getLocalStorageValue("epicureFav") || []; // get favorite list from local storage
 
   useEffect(() => {
     if (!selectedRecipeUri) {
@@ -61,7 +61,7 @@ function RecipeView() {
     navigate(-1);
   };
 
-  const handleFavoriteClick = () => {
+  const handleFavoriteClick = () => {// this function is to handle add/remove item to/from favorite
     let recipeUri = selcetedRecipeRef.current.recipe.uri;
     if (isFav) {
       favorites = favorites.filter((item) => recipeUri !== item.recipe.uri);

@@ -1,6 +1,7 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 import { combineReducers } from "@reduxjs/toolkit";
 
+// initial states for both search history and selected recipe
 const initalSelectedRecipe = {
   selectedRecipeUri: "",
 };
@@ -9,6 +10,7 @@ const initalHistory = {
   searchHistory: [],
 };
 
+// separate slice for history and selected recipe
 const selectedRecipeSlice = createSlice({
   name: "selected recipe",
   initialState: initalSelectedRecipe,

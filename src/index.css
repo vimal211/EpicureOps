@@ -12,7 +12,3 @@ code {
     monospace;
 }
 
-@font-face {
-  font-family: "Roboto";
-  src: url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:wght@100&family=Space+Mono&display=swap");
-}

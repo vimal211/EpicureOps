@@ -13,12 +13,12 @@ function LandingPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const searchHistory = useSelector(
-    (state) => state.searchHistoryReducer.searchHistory,
+    (state) => state.searchHistoryReducer.searchHistory, // get search history from redux store
   );
 
   const handleBtnOnClick = () => {
     if (searchQuery.length !== 0) {
-      dispatch(addHistory(searchQuery));
+      dispatch(addHistory(searchQuery)); // add to search history to store by dipatching event
       navigate(`/search/${searchQuery}`);
       setSearchQuery("");
       setShowSearchHistory(false);

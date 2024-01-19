@@ -13,7 +13,7 @@ function RecipeResults() {
   const pathName = window.location.pathname;
   const navigate = useNavigate();
   const searchName = decodeURI(
-    pathName.substring(pathName.lastIndexOf("/")).split("/").join(""),
+    pathName.substring(pathName.lastIndexOf("/")).split("/").join(""), // get searched result from url
   );
 
   useEffect(() => {
@@ -33,8 +33,10 @@ function RecipeResults() {
   }, []);
 
   useEffect(() => {
+    // this useEffect is used to load more data when showLoadMore is set to true
     let timeoutId;
     if (showLoadMore) {
+    // debounce is used to avoid making many api calls
       timeoutId = setTimeout(() => {
         let nextSetUri = recipeDataRef.current._links.next;
         commonRecipeApi(nextSetUri.href).then((res) => {
@@ -53,7 +55,7 @@ function RecipeResults() {
     };
   }, [showLoadMore]);
 
-  const trackScrolling = (e) => {
+  const trackScrolling = (e) => { // function used to track page scrolling
     let resultContainer =
       e.currentTarget || document.getElementById("recipeResultContainer");
     let scrollDiff = Math.floor(
@@ -61,7 +63,7 @@ function RecipeResults() {
     );
     let nextSetUri = recipeDataRef.current._links.next;
     if (scrollDiff === Math.floor(resultContainer.clientHeight) && nextSetUri) {
-      setShowLoadMore(true);
+      setShowLoadMore(true); // load more data when page is scrolled to bottom of container
     }
   };
 

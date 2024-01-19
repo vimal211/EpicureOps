@@ -9,7 +9,7 @@ function Header() {
   const location = useLocation();
   const isFavPage = location.pathname === "/favorites";
   const handleLogoClick = () => {
-    navigate("/");
+    navigate("/"); //navigate to lnding page on clicking the logo
   };
   return (
     <div className="header__container">

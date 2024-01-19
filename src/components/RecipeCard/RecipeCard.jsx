@@ -28,5 +28,5 @@ function RecipeCard({ imgSrc, name, uri }) {
     </div>
   );
 }
-
+// there will be many RecipeCard component in the app, so it is better to use memo to avoid unwanted rerendring 
 export default memo(RecipeCard);
